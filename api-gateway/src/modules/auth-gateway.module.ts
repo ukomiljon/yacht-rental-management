@@ -3,10 +3,9 @@ import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { AuthGateway } from '../gateways';
 import { UtilsModule } from '../utils/utils.module';
-import { ConfigurationModule } from 'src/configs/config.module';
-
+ 
 @Module({
-  imports: [UtilsModule, ConfigurationModule],
+  imports: [UtilsModule],
   providers: [
     {
       provide: 'AUTH_SERVICE',

@@ -19,9 +19,9 @@ import {
     UserGatewayModule,
     // BookingGatewayModule,
     // PaymentGatewayModule,
-    // ConfigurationModule,
-    // UtilsModule,
-    // HealthModule,
+    ConfigurationModule,
+    UtilsModule,
+    HealthModule,
   ],
   providers: [
     {

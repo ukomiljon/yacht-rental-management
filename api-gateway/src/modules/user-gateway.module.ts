@@ -3,10 +3,9 @@ import { UserGateway } from '../gateways';
 import { ClientProxyFactory, Transport } from '@nestjs/microservices';
 import { ConfigService } from '@nestjs/config';
 import { UtilsModule } from '../utils/utils.module';
-import { ConfigurationModule } from 'src/configs/config.module';
 
 @Module({
-  imports: [UtilsModule, ConfigurationModule],
+  imports: [UtilsModule],
   providers: [
     {
       provide: 'USER_SERVICE',
