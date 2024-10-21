@@ -23,31 +23,31 @@ import {
     UtilsModule,
     HealthModule,
   ],
-  providers: [
-    {
-      provide: APP_GUARD,
-      useClass: AuthGuard,
-    },
-    {
-      provide: 'AUTH_SERVICE',
-      useFactory: (configService: ConfigService) => {
-        const URL = configService.get('rabbitmq_url');
-        const queue = configService.get('authQueue');
+  // providers: [
+  //   {
+  //     provide: APP_GUARD,
+  //     useClass: AuthGuard,
+  //   },
+  //   {
+  //     provide: 'AUTH_SERVICE',
+  //     useFactory: (configService: ConfigService) => {
+  //       const URL = configService.get('rabbitmq_url');
+  //       const queue = configService.get('authQueue');
 
-        return ClientProxyFactory.create({
-          transport: Transport.RMQ,
-          options: {
-            urls: [`amqp://${URL}`],
-            queue,
-            queueOptions: {
-              durable: true,
-            },
-          },
-        });
-      },
-      inject: [ConfigService],
-    },
-  ],
+  //       return ClientProxyFactory.create({
+  //         transport: Transport.RMQ,
+  //         options: {
+  //           urls: [`amqp://${URL}`],
+  //           queue,
+  //           queueOptions: {
+  //             durable: true,
+  //           },
+  //         },
+  //       });
+  //     },
+  //     inject: [ConfigService],
+  //   },
+  // ],
 })
 export class ApiGatewayModule {}
 

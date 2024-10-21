@@ -26,11 +26,11 @@ export class AuthController {
     private readonly authService: AuthService,
     private readonly commonService: CommonService,
     private readonly tokenService: TokenService,
-  ) {}
+  ) { }
 
   @MessagePattern({ cmd: 'login' })
-  getLogin() {
-    return {name:'Komil login'};
+  public async getLogin(payload: any): Promise<any> {
+    return { name: 'Komil login', ...payload };
   }
 
   @MessagePattern({ cmd: 'sign-up' })
@@ -40,7 +40,7 @@ export class AuthController {
     @Ctx() context: RmqContext,
   ): Promise<IMessage> {
     console.log("signUp");
-    
+
     this.commonService.acknowledgeMessage(context);
 
     return await this.authService.signUp(signUpDto, origin);

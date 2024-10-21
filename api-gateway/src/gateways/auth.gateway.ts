@@ -62,7 +62,7 @@ export class AuthGateway {
   public async login(): Promise<any>  {
     console.log("login")
     const payload = { userId: '123' };
-    return true;//this.authService.send({ cmd: 'login' }, payload);
+    return await this.authService.send({ cmd: 'login' }, payload);
   }
 
   @Public()

@@ -30,15 +30,21 @@ export class UserGateway {
   ) { }
 
   @Get('/me')
-  public async GetMe(@CurrentUser() id: string): Promise<IAuthResponseUser> {
-
-    return { id: 'ukomiljon', email: 'ukomiljon@gmail.com', name: 'komil', createdAt: 'aa', updatedAt: 'dd' }
-    return await this.commonService.sendEvent(
-      this.userService,
-      { cmd: 'get-me' },
-      { id },
-    );
+  getUser() {
+    const payload = { userId: '123' };
+    return this.userService.send({ cmd: 'get-user' }, payload);
   }
+
+  // @Get('/me')
+  // public async GetMe(@CurrentUser() id: string): Promise<IAuthResponseUser> {
+
+  //   return { id: 'ukomiljon', email: 'ukomiljon@gmail.com', name: 'komil', createdAt: 'aa', updatedAt: 'dd' }
+  //   return await this.commonService.sendEvent(
+  //     this.userService,
+  //     { cmd: 'get-me' },
+  //     { id },
+  //   );
+  // }
 
   @Get('/')
   public async GetAllUsers(

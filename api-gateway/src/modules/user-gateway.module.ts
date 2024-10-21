@@ -16,10 +16,10 @@ import { UtilsModule } from '../utils/utils.module';
         return ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
-            urls: [`amqp://${URL}`],
-            queue,
+            urls: ['amqp://rabbitmq:5672'],
+            queue: 'user_queue',
             queueOptions: {
-              durable: true,
+              durable: false,
             },
           },
         });
