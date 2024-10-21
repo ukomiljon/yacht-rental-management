@@ -10,9 +10,11 @@ import rateLimit from 'express-rate-limit';
 import { rateLimitConfigObject } from './security/configs';
 import { TimeoutInterceptor } from './interceptors';
 import { ErrorFilter } from './filters';
+import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 
 async function bootstrap() {
   const app = await NestFactory.create(ApiGatewayModule);
+
   const httpAdapterHost = app.get(HttpAdapterHost);
   const configService = app.get(ConfigService);
   const cookieSecret = configService.get<string>('cookie_secret');
@@ -28,6 +30,17 @@ async function bootstrap() {
   );
   app.useGlobalInterceptors(new TimeoutInterceptor());
   app.useGlobalFilters(new ErrorFilter(httpAdapterHost));
+
+
+  const config = new DocumentBuilder()
+    .setTitle('API Gateway')
+    .setDescription('API documentation for the Api-Gateway')
+    .setVersion('1.0')
+    .addTag('gateway')
+    .build();
+
+  const documentFactory = SwaggerModule.createDocument(app, config);
+  SwaggerModule.setup('api-docs', app, documentFactory);
 
   await app.listen(3000);
 }

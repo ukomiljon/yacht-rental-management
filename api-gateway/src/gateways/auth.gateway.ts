@@ -48,22 +48,32 @@ export class AuthGateway {
   public async Get(): Promise<any> {
     console.log("TRUE")
     return true;
-  } 
-
-  @Get('login')
-  login() {
-    const payload = { userId: '123' };
-    return this.authService.send({ cmd: 'login' }, payload);
   }
- 
+
+  @Public()
+  @Get('/me')
+  public async GetMe(): Promise<any> {
+    console.log("TRUE")
+    return true;
+  }
+
+  @Public()
+  @Get('/login')
+  public async login(): Promise<any>  {
+    console.log("login")
+    const payload = { userId: '123' };
+    return true;//this.authService.send({ cmd: 'login' }, payload);
+  }
+
   @Public()
   @Post('/sign-up')
   public async SignUp(
     @Body() signUpDto: SignUpDto,
     @Origin() origin: string,
   ): Promise<IMessage> {
+    console.log("signUpOptions1")
     const signUpOptions = signUpDto;
-
+    console.log("signUpOptions=", signUpOptions)
     return await this.commonService.sendEvent(
       this.authService,
       { cmd: 'sign-up' },

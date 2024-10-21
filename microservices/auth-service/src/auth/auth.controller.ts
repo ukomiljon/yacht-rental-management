@@ -39,6 +39,8 @@ export class AuthController {
     @Payload('origin') origin: string | undefined,
     @Ctx() context: RmqContext,
   ): Promise<IMessage> {
+    console.log("signUp");
+    
     this.commonService.acknowledgeMessage(context);
 
     return await this.authService.signUp(signUpDto, origin);
