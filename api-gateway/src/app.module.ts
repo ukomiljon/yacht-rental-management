@@ -13,7 +13,6 @@ import { UtilsModule } from './utils/utils.module';
     {
       provide: 'AUTH_SERVICE',
       useFactory: () => {
-
         return ClientProxyFactory.create({
           transport: Transport.RMQ,
           options: {
@@ -25,7 +24,6 @@ import { UtilsModule } from './utils/utils.module';
           },
         });
       },
-
     },
   ],
 })
