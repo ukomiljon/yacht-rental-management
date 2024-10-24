@@ -72,14 +72,6 @@
                 const statusDiv = document.getElementById('status');
                 const installDiv = document.getElementById('installMetaMask');
 
-                // Contract details
-                const contractAddress = 'YOUR_CONTRACT_ADDRESS'; // Replace with your contract address
-                const contractABI = [
-                    // Replace with your contract ABI
-                    "function balanceOf(address owner) view returns (uint256)",
-                    "function totalSupply() view returns (uint256)"
-                ];
-
                 // Check if MetaMask is installed
                 function checkMetaMask() {
                     if (typeof window.ethereum !== 'undefined') {
@@ -109,9 +101,9 @@
                         // Get the signer
                         const signer = provider.getSigner();
                         const address = await signer.getAddress();
-
+                        
                         // Create a contract instance
-                        const contract = new ethers.Contract(contractAddress, contractABI, signer);
+                        //const contract = new ethers.Contract(contractAddress, contractABI, signer); 
 
                         // Sign the message using the signer accounte
                         const message = `I am signing this message to prove my identity. Komil`;
@@ -124,8 +116,8 @@
                         console.log(`Signer: `, signer);
                         console.log(`Account: `, account);
                         console.log(`address: `, address);
-                        console.log(`Data: `, data);
-
+                        console.log(`Data: `, data); 
+                       
                     } catch (error) {
                         console.error(error);
                         statusDiv.innerText = 'Failed to connect to MetaMask. Please try again.';
