@@ -1,18 +1,17 @@
 import { NestFactory } from '@nestjs/core';
-import { MicroserviceOptions, Transport } from '@nestjs/microservices';
 import { AppModule } from './app.module';
+import { Logger } from '@nestjs/common';
+import { microserviceOptions } from './configs/microservice-connection.config';
+
+const logger = new Logger('AuthMicroservice');
 
 async function bootstrap() {
-  const app = await NestFactory.createMicroservice<MicroserviceOptions>(AppModule, {
-    transport: Transport.RMQ,
-    options: {
-      urls: [process.env.RABBITMQ_URL],
-      queue: process.env.RABBITMQ_USER_QUEUE,
-      queueOptions: {
-        durable: false,
-      },
-    },
-  });
-  await app.listen();
+  const app = await NestFactory.create(AppModule);
+
+  app.connectMicroservice(microserviceOptions);
+  app.startAllMicroservices();
+
+  await app.listen(3002);
+  logger.log('Microservice is listening');
 }
 bootstrap();
