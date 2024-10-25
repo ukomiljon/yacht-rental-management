@@ -9,19 +9,19 @@ services:
       RABBITMQ_DEFAULT_USER: guest
       RABBITMQ_DEFAULT_PASS: guest
 
-  api-gateway:
-    build: ./api-gateway
-    ports:
-      - '3000:3000'
-    depends_on:
-      - rabbitmq
+  # api-gateway:
+  #   build: ./api-gateway
+  #   ports:
+  #     - '3000:3000'
+  #   depends_on:
+  #     - rabbitmq
 
-  user-microservice:
-    build: ./microservices/user-service
-    depends_on:
-      - rabbitmq
+  # user-microservice:
+  #   build: ./microservices/user-service
+  #   depends_on:
+  #     - rabbitmq
 
-  auth-microservice:
-    build: ./microservices/auth-service
-    depends_on:
-      - rabbitmq
+  # auth-microservice:
+  #   build: ./microservices/auth-service
+  #   depends_on:
+  #     - rabbitmq
