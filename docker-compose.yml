@@ -16,6 +16,8 @@ services:
         - POSTGRESQL_USERNAME=admin
         - POSTGRESQL_PASSWORD=admin
         - POSTGRESQL_DATABASE=yacht
+      volumes:
+        - local_pgdata:/var/lib/postgresql/data
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -25,9 +27,9 @@ services:
     depends_on:
       - postgres
     ports:
-      - "5050:80"
+      - "8080:80"
     volumes:
-      - pgadmin_data:/var/lib/pgadmin
+      - pgadmin-data:/var/lib/pgadmin
   mongo:
     image: mongo
     restart: always
@@ -35,6 +37,8 @@ services:
       - 27017:27017
     environment:
       MONGODB_DATABASE: yacht
+    volumes:
+      - mongo-data:/data/db
   # api-gateway:
   #   build: ./api-gateway
   #   ports:
@@ -51,3 +55,7 @@ services:
   #   build: ./microservices/auth-service
   #   depends_on:
   #     - rabbitmq
+volumes:
+  local_pgdata:
+  pgadmin-data:
+  mongo-data:

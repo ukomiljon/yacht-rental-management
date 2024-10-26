@@ -9,8 +9,9 @@ import {
   HttpStatus,
   Patch,
   Get,
+  Param,
 } from '@nestjs/common';
-import { Response } from 'express'; 
+import { Response } from 'express';
 import { ClientProxy } from '@nestjs/microservices';
 import { AuthResponseMapper } from '../mappers';
 import { IMessage, ICustomRequest } from '../interfaces';
@@ -41,12 +42,6 @@ export class AuthGateway {
     this.testing = process.env.TESTING === 'true';
   } 
 
-  @Get('login')
-  login() {
-    const payload = { userId: '123' };
-    return this.authService.send({ cmd: 'login' }, payload);
-  } 
-  
   @Public()
   @Post('/sign-up')
   public async SignUp(
@@ -55,7 +50,7 @@ export class AuthGateway {
   ): Promise<IMessage> {
     const signUpOptions = signUpDto;
 
-    console.log("signUpDto--->",signUpDto);
+    console.log("signUpDto--->", signUpDto);
     // return await this.authService.send({ cmd: 'sign-up' }, { signUpOptions, origin }) as any; 
     return await this.commonService.sendEvent(
       this.authService,
@@ -71,7 +66,7 @@ export class AuthGateway {
     @Body() signInDto: SignInDto,
     @Origin() origin: string | undefined,
   ): Promise<void> {
-    const signInOptions = signInDto; 
+    const signInOptions = signInDto;
     const result = await this.commonService.sendEvent(
       this.authService,
       { cmd: 'sign-in' },
@@ -122,6 +117,16 @@ export class AuthGateway {
   }
 
   @Public()
+  @Get('confirm-email/:token')
+  async confirmEmail(
+    @Res() res: Response,
+    @Param('token') token: string,
+    @Origin() origin: string): Promise<void> {
+
+    await this.ConfirmEmail(res, { confirmationToken: token }, origin)
+  }
+
+  @Public()
   @Post('/confirm-email')
   public async ConfirmEmail(
     @Res() res: Response,
@@ -129,6 +134,8 @@ export class AuthGateway {
     @Origin() origin: string,
   ): Promise<void> {
     const confirmEmailOptions = confirmEmailDto;
+    ///api/v1/auth/confirm-email/
+    console.log("ConfirmEmailDto:", confirmEmailDto);
 
     const result = await this.commonService.sendEvent(
       this.authService,

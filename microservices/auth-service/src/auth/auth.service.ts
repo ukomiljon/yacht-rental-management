@@ -51,12 +51,17 @@ export class AuthService {
       { email, name, password1 },
     );
 
+    console.log("user:", user);
+
     const tokenType = TokenTypeEnum.CONFIRMATION;
     const confirmationToken = await this.tokenService.generateToken(
       user,
       tokenType,
       domain,
     );
+
+    console.log("confirmationToken:", confirmationToken);
+    
 
     this.commonService.sendEvent(
       this.mailerService,
