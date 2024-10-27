@@ -3,7 +3,7 @@ import { AppModule } from './app.module';
 import { Logger } from '@nestjs/common';
 import { microserviceOptions } from './configs/microservice-connection.config';
 
-const logger = new Logger('AuthMicroservice');
+const logger = new Logger('UserMicroservice');
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -12,6 +12,7 @@ async function bootstrap() {
   app.startAllMicroservices();
 
   await app.listen(3002);
-  logger.log('Microservice is listening');
+
+  console.log(`Application is running on: https://localhost:3002 user-service`);
 }
 bootstrap();

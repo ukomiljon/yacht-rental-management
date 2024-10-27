@@ -8,7 +8,7 @@ import { ValidationPipe } from '@nestjs/common';
 import { TimeoutInterceptor } from './interceptors';
 import { ErrorFilter } from './filters';
 import * as cookieParser from 'cookie-parser';
-import * as compression from 'compression';
+import * as compression from 'compression'; 
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
@@ -39,8 +39,9 @@ async function bootstrap() {
   SwaggerModule.setup('api-docs', app, documentFactory);
 
   await app.listen(3000);
-  
-  console.log(`Application is running on: https://localhost:3000`);
+   
+  console.log(`Application is running on: https://localhost:3000 API Gateway`); 
 }
+ 
 bootstrap();
 

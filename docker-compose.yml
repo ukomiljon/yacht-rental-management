@@ -1,23 +1,125 @@
- 
+
 services:
+  # api-gateway:
+  #   container_name: api-gateway
+  #   build:
+  #     context: ./api-gateway
+  #     # target: development
+  #   ports:
+  #     - 3000:3000
+  #   restart: on-failure
+  #   depends_on:
+  #     - auth-service
+  #     - user-service
+  #     - booking-service
+  #     - payment-service
+  #     - mailer-service
+  #     - postgres-db
+  #     - mongo-db
+  #   networks:
+  #     - service-network 
+
+  # auth-service:
+  #   container_name: auth-microservice
+  #   build:
+  #     context: ./microservices/auth-service
+  #     # target: development
+  #   ports:
+  #     - 3001:3001
+  #   restart: on-failure
+  #   depends_on:
+  #     - postgres-db
+  #     - mongo-db
+  #     - mailer-service
+  #   networks:
+  #     - service-network    
+
+  # user-service:
+  #   container_name: user-microservice
+  #   build:
+  #     context: ./microservices/user-service
+  #     # target: development
+  #   ports:
+  #     - 3002:3002
+  #   restart: on-failure
+  #   depends_on:
+  #     - postgres-db
+  #     - mongo-db
+  #     - auth-service
+  #   networks:
+  #     - service-network
+    
+  # booking-service:
+  #   container_name: booking-microservice
+  #   build:
+  #     context: ./microservices/booking-service
+  #     # target: development
+  #   ports:
+  #     - 3003:3003
+  #   restart: on-failure
+  #   depends_on:
+  #     # - postgres-db
+  #     - mongo-db
+  #     - auth-service
+  #   networks:
+  #     - service-network     
+
+  # payment-service:
+  #   container_name: payment-microservice
+  #   build:
+  #     context: ./microservices/payment-service
+  #     # target: development
+  #   ports:
+  #     - 3004:3004
+  #   restart: on-failure
+  #   depends_on:
+  #     # - postgres-db
+  #     - mongo-db
+  #     - auth-service
+  #   networks:
+  #     - service-network      
+
+  # mailer-service:
+  #   container_name: mailer-microservice
+  #   build:
+  #     context: ./microservices/mailer-service
+  #     # target: development
+  #   ports:
+  #     - 3005:3005
+  #   restart: on-failure
+  #   depends_on:
+  #     - postgres-db
+  #     - mongo-db
+  #   networks:
+  #     - service-network
+    
   rabbitmq:
     image: rabbitmq:3-management
+    container_name: rabbitmq
+    hostname: rabbitmq
     ports:
-      - '5672:5672'
-      - '15672:15672'
+      - 5672:5672  # RabbitMQ default messaging port
+      - 15672:15672  # RabbitMQ management console
     environment:
-      RABBITMQ_DEFAULT_USER: admin
-      RABBITMQ_DEFAULT_PASS: admin
-  postgres:
-      image: bitnami/postgresql
-      ports:
-        - 5432:5432
-      environment:
-        - POSTGRESQL_USERNAME=admin
-        - POSTGRESQL_PASSWORD=admin
-        - POSTGRESQL_DATABASE=yacht
-      volumes:
-        - local_pgdata:/var/lib/postgresql/data
+      RABBITMQ_DEFAULT_USER: "admin"
+      RABBITMQ_DEFAULT_PASS: "admin"
+    networks:
+      - service-network
+      
+  postgres-db:
+    image: bitnami/postgresql
+    restart: always
+    networks:
+      - service-network    
+    ports:
+      - 5432:5432
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRESQL_USERNAME=admin
+      - POSTGRESQL_PASSWORD=admin
+      - POSTGRESQL_DATABASE=yacht
+
   pgadmin:
     image: dpage/pgadmin4
     container_name: pgadmin
@@ -25,37 +127,52 @@ services:
       PGADMIN_DEFAULT_EMAIL: admin@admin.com
       PGADMIN_DEFAULT_PASSWORD: admin
     depends_on:
-      - postgres
+      - postgres-db
     ports:
-      - "8080:80"
+      - 8080:80
+    networks:
+      - service-network
     volumes:
       - pgadmin-data:/var/lib/pgadmin
-  mongo:
-    image: mongo
+
+  mongo-db:
+    image: mongo:latest
     restart: always
+    networks:
+      - service-network
     ports:
       - 27017:27017
+      # - "${MONGO_PORT}:${MONGO_PORT}"    # Uses the port from the .env file
     environment:
       MONGODB_DATABASE: yacht
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+      #  - MONGO_INITDB_ROOT_USERNAME=${MONGO_INITDB_ROOT_USERNAME} # Uses the USERNAME from the .env file
+      #  - MONGO_INITDB_ROOT_PASSWORD=${MONGO_INITDB_ROOT_PASSWORD} # Uses the PASSWORD from the .env file
     volumes:
       - mongo-data:/data/db
-  # api-gateway:
-  #   build: ./api-gateway
-  #   ports:
-  #     - '3000:3000'
-  #   depends_on:
-  #     - rabbitmq
 
-  # user-microservice:
-  #   build: ./microservices/user-service
-  #   depends_on:
-  #     - rabbitmq
+  mongo-express:
+    image: mongo-express:latest
+    container_name: mongo-express
+    networks:
+      - service-network
+    environment:
+      # ME_CONFIG_MONGODB_URL: mongodb://root:admin@mongo:27017
+      ME_CONFIG_MONGODB_ADMINUSERNAME: admin
+      ME_CONFIG_MONGODB_ADMINPASSWORD: admin
+      ME_CONFIG_BASICAUTH_USERNAME: admin
+      ME_CONFIG_BASICAUTH_PASSWORD: admin
+      ME_CONFIG_MONGODB_SERVER: mongo-db
+    ports:
+      - "8081:8081" # Access at http://localhost:8081
+    depends_on:
+      - mongo-db  # Ensure MongoDB starts before Mongo Express
 
-  # auth-microservice:
-  #   build: ./microservices/auth-service
-  #   depends_on:
-  #     - rabbitmq
+networks:
+  service-network:
+
 volumes:
-  local_pgdata:
+  postgres-data:
   pgadmin-data:
   mongo-data:

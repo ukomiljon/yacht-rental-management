@@ -12,7 +12,7 @@ async function bootstrap() {
   app.startAllMicroservices();
 
   await app.listen(3001);
-  
-  logger.log('Microservice is listening');
+
+  console.log(`Application is running on: https://localhost:3001 auth-service`);
 }
 bootstrap();

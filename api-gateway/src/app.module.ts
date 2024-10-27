@@ -6,12 +6,16 @@ import { HealthModule } from './health/health.module';
 import { APP_GUARD } from '@nestjs/core';
 import { AuthGuard } from './guards';
 import { ConfigModule } from '@nestjs/config';
+import { BookingGatewayModule } from './modules/booking-gateway.module';
+import { PaymentGatewayModule } from './modules/payment-gateway.module';
 
 @Module({
   imports: [
     UtilsModule,
     AuthGatewayModule,
     UserGatewayModule,
+    BookingGatewayModule,
+    PaymentGatewayModule,
     HealthModule,
     ConfigModule.forRoot({
       isGlobal: true,
