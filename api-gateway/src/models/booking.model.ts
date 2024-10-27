@@ -7,6 +7,9 @@ export class BookingModel {
   @IsString()
   customer_id: string;
 
+  @IsString()
+  inventory_id: string;
+
   @IsDate()
   createdAt: Date;
 

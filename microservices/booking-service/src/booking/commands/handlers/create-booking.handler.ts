@@ -15,11 +15,12 @@ export class CreateBookingHandler
   ) {}
 
   async execute(command: CreateBookingCommand) {
-    const { customer_id } = command.createBookingDto;
+    const { customer_id, inventory_id } = command.createBookingDto;
     const createdAt = new Date();
     const updatedAt = new Date();
     const bookingData = await this.bookingRepository.create({
       customer_id,
+      inventory_id,
       createdAt,
       updatedAt,
     }); 

@@ -7,6 +7,9 @@ export class BookingEntity extends BaseEntity {
 
   @Column()
   customer_id: string;
+  
+  @Column()
+  inventory_id: string;
 
   @Column()
   public createdAt: Date;

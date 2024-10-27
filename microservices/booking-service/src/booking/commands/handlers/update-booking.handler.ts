@@ -17,11 +17,11 @@ export class UpdateBookingHandler
 
   async execute(command: UpdateBookingCommand) {
     const { id, updatedBooking } = command.updateBookingDto;
-    const { customer_id } = updatedBooking;
+    const { customer_id, inventory_id } = updatedBooking;
     try {
       await this.bookingRepository.update(
         { _id: new ObjectId(id) },
-        { customer_id },
+        { customer_id, inventory_id },
       );
 
       const booking = await this.bookingRepository.findOne({
