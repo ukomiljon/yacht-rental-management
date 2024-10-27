@@ -20,8 +20,8 @@ export class PaymentModel {
   currency: string;
 
   @IsString()
-  stripe_id: string;
+  transaction_id: string;
 
   @IsString()
-  stripe_status: string;
+  transaction_status: string;
 }

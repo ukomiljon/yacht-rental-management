@@ -22,10 +22,8 @@ export class CreateBookingHandler
       customer_id,
       createdAt,
       updatedAt,
-    });
-
-    console.log("bookingData:",bookingData);    
-
+    }); 
+   
     try {
       return await this.bookingRepository.save(bookingData);
     } catch (error) {

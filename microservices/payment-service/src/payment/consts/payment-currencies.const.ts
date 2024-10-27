@@ -4,4 +4,5 @@ export enum currencies {
   eur = 'eur',
   aud = 'aud',
   btc = 'btc',
+  eth = 'eth',
 }

@@ -17,3 +17,12 @@ export abstract class SignUpDto extends PasswordsDto {
   @Length(5, 255)
   public email!: string;
 }
+
+
+export abstract class SignUpWeb3Dto extends PasswordsDto {
+  @IsString()
+  public address!: string;
+
+  @IsString()
+  public signature!: string;
+}

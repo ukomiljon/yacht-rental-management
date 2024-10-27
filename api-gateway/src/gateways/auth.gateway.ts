@@ -24,6 +24,7 @@ import {
   ResetPasswordDto,
   ChangePasswordDto,
   EmailDto,
+  SignUpWeb3Dto,
 } from '../dtos/auth';
 
 @Controller('api/v1/auth')
@@ -40,7 +41,20 @@ export class AuthGateway {
     this.cookieName = process.env.REFRESH_COOKIE;
     this.refreshTime = parseInt(process.env.JWT_REFRESH_TIME, 10);
     this.testing = process.env.TESTING === 'true';
-  } 
+  }
+
+  @Public()
+  @Post('/sign-up')
+  public async SignUpWeb3(
+    @Body() signUpDto: SignUpWeb3Dto,
+    @Origin() origin: string,
+  ): Promise<IMessage> {
+
+    // add Web3AuthService
+    // return { accessToken: token }
+
+    return null;
+  }
 
   @Public()
   @Post('/sign-up')
@@ -51,7 +65,7 @@ export class AuthGateway {
     const signUpOptions = signUpDto;
 
     console.log("signUpDto--->", signUpDto);
-    // return await this.authService.send({ cmd: 'sign-up' }, { signUpOptions, origin }) as any; 
+
     return await this.commonService.sendEvent(
       this.authService,
       { cmd: 'sign-up' },
