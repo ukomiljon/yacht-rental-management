@@ -1,7 +1,6 @@
  
 
-![Screenshot 2024-10-28 205940](https://github.com/user-attachments/assets/4d137866-9fcc-40d6-940d-f19eab2c3e1d)
-
+![image](https://github.com/user-attachments/assets/dfd953b5-2963-4fb8-9778-6f60be73937b)
 
 1. docker compose down   
 
