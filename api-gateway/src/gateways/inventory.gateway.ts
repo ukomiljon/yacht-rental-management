@@ -33,13 +33,13 @@ export class InventoryGateway {
 
   @Post('/')
   public async CreateInventory(
-    @Body() newBooking: CreateInventoryDto,
+    @Body() newInventory: CreateInventoryDto,
   ): Promise<IResponseInventory> {
-    console.log("CreateBookingDto:", newBooking);
+    console.log("newInventory:", newInventory);
     return await this.commonService.sendEvent(
       this.inventoryService,
       { cmd: 'create-inventory' },
-      { ...newBooking },
+      { ...newInventory },
     );
   }
 
@@ -58,7 +58,7 @@ export class InventoryGateway {
   public async GetInventory(@Param() params: GetInventoryDto): Promise<IResponseInventory> {
     return await this.commonService.sendEvent(
       this.inventoryService,
-      { cmd: 'get-single-Inventory' },
+      { cmd: 'get-inventory' },
       { ...params },
     );
   }

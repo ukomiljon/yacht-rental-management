@@ -44,7 +44,7 @@ export class AuthGateway {
   }
 
   @Public()
-  @Post('/sign-up')
+  @Post('/sign-up-web3')
   public async SignUpWeb3(
     @Body() signUpDto: SignUpWeb3Dto,
     @Origin() origin: string,
