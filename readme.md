@@ -21,8 +21,8 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **Asynchronous Communication**: Utilizes RabbitMQ for reliable, non-blocking service communication.
 
 ## Database Choices
-- **PostgreSQL with Prisma**: Structured management of user data and bookings.
-- **MongoDB (TypeORM)**: Flexible handling of payment data.
+- **PostgreSQL with Prisma**: Structured management of user data and yacht inventories.
+- **MongoDB (TypeORM)**: Flexible handling of payment and booking data.
 
 ## Security Measures
 - **OAuth2 with JWT**: Secure, stateless user authentication.
@@ -47,14 +47,14 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **CQRS Implementation**: Separates read/write operations for scalability.
 - **Stripe Integration**: Secure payment processing (In progress).
 - **Redis Caching**: Enhances response times and reduces database load.
-- **Compression**: Reduces payload sizes for optimized bandwidth.
-- **Helmet**: Sets security-related HTTP headers.
-- **Rate Limiting**: Prevents abuse and maintains performance.
-- **CORS**: Enables secure cross-origin requests.
+- **Compression**:This middleware reduces the size of the response payloads, optimizing bandwidth usage and improving load times for users. It can significantly enhance the user experience, especially for clients with slower internet connections.
+- **Helmet**: This middleware sets various HTTP headers to help protect the application from known web vulnerabilities. It includes protections against cross-site scripting (XSS), clickjacking, and other attacks, making it an essential security feature.
+- **Rate Limiting**: This feature is implemented to control the number of requests a user can make to the API in a given timeframe. It protects the application from abuse and prevents overload, ensuring fair usage across all users and maintaining overall performance.
+- **CORS**: Enabling CORS allows your API to be accessed from different domains securely. It prevents issues related to same-origin policy restrictions in browsers, facilitating seamless integration with various frontend applications.
 - **Dockerization**: Ensures consistent service deployment.
 - **Husky for Development**: Streamlines development workflows.
-- **Inter-service Communication (Intersop)**: Enhances performance and fault tolerance.
-- **Error Filtering**: Centralizes error handling for better user experience.
+- **Inter-service Communication (Intersop)**: It'is crucial in microservices architecture, as it allows independent services to interact seamlessly. Effective communication ensures that data flows smoothly between services, facilitating complex operations like booking and payments. For the Travel Booking Microservice architecture, I integrated RabbitMQ for asynchronous messaging, which enhances reliability and decouples services, allowing them to function independently. This minimizes the impact of potential failures, boosts performance, and maintains service responsiveness.
+- **Error Filtering**: Adding a filter for error handling is essential to maintain the robustness of the microservices architecture. This filter intercepts incoming requests, allowing for centralized management of error responses, logging, and exception handling. By doing so, it ensures that consistent error messages are sent to the clients, improving the user experience. It also aids in debugging and monitoring by logging detailed error information, which helps identify issues early in the request processing cycle.
 - **OpenAI Service**: Integrates ChatGPT for optimal user assistance (Not started yet).
  
  
