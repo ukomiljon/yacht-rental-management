@@ -5,7 +5,70 @@
 # Yacht Rental Management System
 
 ## Project Overview
-The Yacht Rental Management architecture addresses scalability, modularity, and performance by distributing functionality across multiple specialized services. Each microservice manages its domain independently, enhancing operational flexibility and fault isolation.
+The Yacht Rental Management architecture tackles the issues of scalability, modularity, and performance by distributing functionality across multiple specialized services. Each microservice independently manages aspects like user authentication, booking, and payments. This distributed setup improves both operational flexibility and fault isolation, ensuring that failures in one service don’t affect the entire system.
+
+## Microservices Architecture
+A microservices approach enables independent deployment, development, and scaling for each service. By segregating concerns into focused services, the project achieves:
+
+- **Isolation and Independence**: Each service can be developed, updated, or scaled without impacting others.
+- **Scalability**: Allows fine-grained scaling based on load (e.g., scaling booking services independently during high demand).
+- **Fault Tolerance**: If one service fails (e.g., payment service), it doesn’t bring down the entire application.
+
+
+## RabbitMQ
+
+RabbitMQ is a message broker that facilitates reliable, asynchronous communication between microservices. It is particularly useful for operations that don’t require immediate responses, such as:
+
+- **Booking Confirmation**: The booking service can confirm reservations asynchronously.
+- **Notification Dispatching**: Notifications (like booking confirmations or payment receipts) are sent without blocking other processes.
+
+### Why RabbitMQ?
+
+- **Resilience**: Provides a fault-tolerant system where messages are reliably queued, processed in order, and retried if necessary.
+- **Complex Routing**: Supports complex routing rules and retry mechanisms, vital for coordinating tasks across services.
+
+## Database Choices: PostgreSQL & MongoDB
+
+The architecture employs a dual-database approach to address different data needs across services:
+
+### PostgreSQL with Prisma for Users and Bookings
+
+- **Relational Integrity**: SQL is optimal for managing structured data with complex relationships, such as users and bookings.
+- **ORM with Prisma**: Prisma’s type-safe API improves development speed and code reliability, simplifying database operations and minimizing boilerplate code.
+- **Data Consistency**: ACID compliance ensures data consistency, crucial for user profiles and booking transactions.
+
+### MongoDB for Payments
+
+- **Document-based Flexibility**: MongoDB’s schema-less nature is ideal for payment data, which can vary by transaction type.
+- **High Throughput**: Suitable for handling a large volume of payment records, as MongoDB’s design supports fast reads and writes.
+- **Scalability**: Easily scales horizontally, fitting applications with high data ingestion requirements.
+
+## Frameworks and ORM Choices
+
+- **NestJS**: The backbone of the microservices architecture, NestJS’s modular structure and support for TypeScript align well with microservices development.
+
+### Prisma and TypeORM
+
+- **Prisma for PostgreSQL Services**: Its developer-friendly API is useful for building high-performance queries and data modeling. It enhances type safety and ensures cleaner code.
+- **TypeORM for MongoDB and Other Services**: TypeORM is flexible and integrates well with various SQL and NoSQL databases, making it valuable for managing MongoDB documents.
+
+## Security and Authentication
+
+To safeguard the platform, OAuth2 with JWT (JSON Web Tokens) is employed for secure, stateless user authentication. Other key security measures include:
+
+- **Redis Caching**: Redis caches JWT tokens and sessions, reducing the need for repeated authentication checks and improving response times.
+- **bcrypt for Password Hashing**: bcrypt securely hashes passwords, providing resistance against brute-force attacks by increasing computational difficulty.
+- **API Gateway Enforcement**: The API Gateway filters and authorizes requests before routing them to microservices, reducing exposure to unauthorized requests.
+
+### Advantages
+
+- **JWT’s Stateless Nature**: Enables lightweight, decentralized authentication.
+- **Redis Performance**: Enhances performance by caching token data, reducing database calls for frequent logins.
+
+## Deployment and Scalability
+
+Each microservice is containerized with Docker, facilitating straightforward deployment, replication, and scaling. Docker Compose is used to orchestrate multi-container setups, streamlining development and testing. In production, orchestration tools like Kubernetes can be leveraged to automate container scaling and resilience.
+
 
 ## Architecture & Technologies
 - **API Gateway**: The entry point for all services, consolidating multiple endpoints and managing traffic.
