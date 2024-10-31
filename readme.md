@@ -129,4 +129,5 @@ Each microservice is containerized with Docker, facilitating straightforward dep
 - **JSON Web Tokens (JWT)**
 - **bcrypt.js**
 - **Google Gmail (for Notification Service)**
+- **Docker**
 
