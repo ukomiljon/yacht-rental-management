@@ -38,7 +38,7 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **User Session Management**: Maintains secure access to protected resources.
 
 ### Booking Service
-- **Ticket Booking**: Enables users to book travel tickets.
+- **Ticket Booking**: Enables users to book a yacht to rent.
 - **Ticket Cancellation**: Allows users to cancel booked tickets.
 - **Ticket Update**: Allows users to update booked tickets.
 
@@ -53,7 +53,7 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **CORS**: Enabling CORS allows your API to be accessed from different domains securely. It prevents issues related to same-origin policy restrictions in browsers, facilitating seamless integration with various frontend applications.
 - **Dockerization**: Ensures consistent service deployment.
 - **Husky for Development**: Streamlines development workflows.
-- **Inter-service Communication (Intersop)**: It'is crucial in microservices architecture, as it allows independent services to interact seamlessly. Effective communication ensures that data flows smoothly between services, facilitating complex operations like booking and payments. For the Travel Booking Microservice architecture, I integrated RabbitMQ for asynchronous messaging, which enhances reliability and decouples services, allowing them to function independently. This minimizes the impact of potential failures, boosts performance, and maintains service responsiveness.
+- **Inter-service Communication (Intersop)**: It'is crucial in microservices architecture, as it allows independent services to interact seamlessly. Effective communication ensures that data flows smoothly between services, facilitating complex operations like booking and payments. 
 - **Error Filtering**: Adding a filter for error handling is essential to maintain the robustness of the microservices architecture. This filter intercepts incoming requests, allowing for centralized management of error responses, logging, and exception handling. By doing so, it ensures that consistent error messages are sent to the clients, improving the user experience. It also aids in debugging and monitoring by logging detailed error information, which helps identify issues early in the request processing cycle.
 - **OpenAI Service**: Integrates ChatGPT for optimal user assistance (Not started yet).
  
