@@ -130,4 +130,5 @@ Each microservice is containerized with Docker, facilitating straightforward dep
 - **bcrypt.js**
 - **Google Gmail (for Notification Service)**
 - **Docker**
+- **Swagger**
 
