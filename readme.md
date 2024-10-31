@@ -38,9 +38,9 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **User Session Management**: Maintains secure access to protected resources.
 
 ### Booking Service
-- **Ticket Booking**: Enables users to book a yacht to rent.
-- **Ticket Cancellation**: Allows users to cancel booked tickets.
-- **Ticket Update**: Allows users to update booked tickets.
+- **Yacht Rent Booking**: Enables users to book a yacht to rent.
+- **Yacht Rent Cancellation**: Allows users to cancel booked a yacht.
+- **Yacht Rent Update**: Allows users to update booked a yacht.
 
 ### Additional Features
 - **RabbitMQ Communication**: Reliable and asynchronous message processing.
