@@ -11,14 +11,14 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **API Gateway**: The entry point for all services, consolidating multiple endpoints and managing traffic.
   
 - **Microservices**:
-  - **Authentication Service**: Manages user authentication and authorization.
-  - **User Management Service**: Handles user data and profiles.
-  - **Booking Service**: Manages reservations, cancellations, and availability.
-  - **Payment Processing Service**: Integrates with payment gateways for transactions.
-  - **Inventory Service**: Manages yacht listings and availability using PostgreSQL with Prisma.
-  - **OpenAI Service**: Integrates ChatGPT to assist users with queries in natural language (Not started yet).
-  - **Blockchain authentication**: Traditional authentication systems are centralized and vulnerable to breaches, while blockchain authentication is decentralized, enhancing security and data integrity. It uses cryptographic techniques to prevent unauthorized access and ensures immutability, making tampering difficult. This transparency fosters accountability and reduces fraud, making blockchain a superior option for secure authentication compared to conventional methods (Not started yet).
-  - **Cryptocurrency payments**:  As digital currencies gain popularity, integrating them can improve competitiveness and adaptability in the market (Not started yet).
+  -[x] **Authentication Service**: Manages user authentication and authorization.
+  -[x] **User Management Service**: Handles user data and profiles.
+  -[x] **Booking Service**: Manages reservations, cancellations, and availability.
+  -[x] **Payment Processing Service**: Integrates with payment gateways for transactions.
+  -[x] **Inventory Service**: Manages yacht listings and availability using PostgreSQL with Prisma.
+  -[ ] **OpenAI Service**: Integrates ChatGPT to assist users with queries in natural language (Not started yet).
+  -[ ] **Blockchain authentication**: Traditional authentication systems are centralized and vulnerable to breaches, while blockchain authentication is decentralized, enhancing security and data integrity. It uses cryptographic techniques to prevent unauthorized access and ensures immutability, making tampering difficult. This transparency fosters accountability and reduces fraud, making blockchain a superior option for secure authentication compared to conventional methods (Not started yet).
+  -[ ] **Cryptocurrency payments**:  As digital currencies gain popularity, integrating them can improve competitiveness and adaptability in the market (Not started yet).
 
 - **Asynchronous Communication**: Utilizes RabbitMQ for reliable, non-blocking service communication.
 
