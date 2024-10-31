@@ -31,9 +31,9 @@ RabbitMQ is a message broker that facilitates reliable, asynchronous communicati
 
 The architecture employs a dual-database approach to address different data needs across services:
 
-### PostgreSQL with Prisma for Users and Bookings
+### PostgreSQL with Prisma for Users and Yacht
 
-- **Relational Integrity**: SQL is optimal for managing structured data with complex relationships, such as users and bookings.
+- **Relational Integrity**: SQL is optimal for managing structured data with complex relationships, such as users and yachts.
 - **ORM with Prisma**: Prisma’s type-safe API improves development speed and code reliability, simplifying database operations and minimizing boilerplate code.
 - **Data Consistency**: ACID compliance ensures data consistency, crucial for user profiles and booking transactions.
 
