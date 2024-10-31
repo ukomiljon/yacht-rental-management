@@ -25,11 +25,10 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **MongoDB (TypeORM)**: Flexible handling of payment and booking data.
 
 ## Security Measures
-- **OAuth2 with JWT**: Secure, stateless user authentication.
-- **Input Validation**: Mitigates SQL injection vulnerabilities.
-- **CSRF Protection**: Ensures authenticated requests.
-- **XSS Mitigation**: Input sanitization to prevent harmful scripts.
-
+- **SQL Injection**: Prisma uses parameterized queries, automatically sanitizing inputs to prevent SQL injection attacks.
+- **Cross-Site Scripting (XSS)**: OAuth2 promotes best practices for secure token management, while Prisma encourages input validation, reducing the risk of XSS.
+- **Cross-Site Request Forgery (CSRF)**: OAuth2 uses token-based authentication, which can help prevent CSRF by ensuring that requests are made by authenticated users.
+ 
 ## Features
 ### Authentication Service
 - **User Signup**: Create new accounts with personal details.
