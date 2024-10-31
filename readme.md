@@ -16,7 +16,7 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
   - **Booking Service**: Manages reservations, cancellations, and availability.
   - **Payment Processing Service**: Integrates with payment gateways for transactions.
   - **Inventory Service**: Manages yacht listings and availability using PostgreSQL with Prisma.
-  - **OpenAI Service**: Integrates ChatGPT to assist users with queries in natural language.
+  - **OpenAI Service**: Integrates ChatGPT to assist users with queries in natural language (Not started yet).
 
 - **Asynchronous Communication**: Utilizes RabbitMQ for reliable, non-blocking service communication.
 
@@ -56,20 +56,8 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **Inter-service Communication (Intersop)**: Enhances performance and fault tolerance.
 - **Error Filtering**: Centralizes error handling for better user experience.
 - **OpenAI Service**: Integrates ChatGPT for optimal user assistance (Not started yet).
-
-## Summary Table of Technologies and Rationale
-| Component                  | Technology            | Rationale                                                                                | Status         |
-|----------------------------|-----------------------|-----------------------------------------------------------------------------------------|----------------|
-| API Gateway                | NestJS                | Unified access and security enforcement.                                               | ✔️             |
-| Messaging                  | RabbitMQ              | Enables asynchronous communication.                                                    | ✔️             |
-| User & Booking Database     | PostgreSQL + Prisma   | Ensures relational integrity with easy querying.                                       | ✔️             |
-| Payment Database           | MongoDB               | Flexible schema-less storage for high transaction volume.                              | ✔️ (In progress) |
-| Authentication & Security  | JWT, Redis, bcrypt    | Secure authentication with session caching.                                           | ✔️             |
-| Framework                  | NestJS                | Modular framework optimized for microservices.                                        | ✔️             |
-| ORM                        | Prisma & TypeORM      | Type-safe SQL queries and simplified database access.                                 | ✔️             |
-
-
-
+ 
+ 
 ## Technologies Used
 - **TypeScript**
 - **Node.js**
@@ -81,9 +69,3 @@ The Yacht Rental Management architecture addresses scalability, modularity, and 
 - **bcrypt.js**
 - **Google Gmail (for Notification Service)**
 
-
-
-
-1. docker compose down   
-
-2. docker compose up --build
