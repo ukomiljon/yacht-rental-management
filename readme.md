@@ -85,10 +85,7 @@ Each microservice is containerized with Docker, facilitating straightforward dep
 
 - **Asynchronous Communication**: Utilizes RabbitMQ for reliable, non-blocking service communication.
 
-## Database Choices
-- **PostgreSQL with Prisma**: Structured management of user data and yacht inventories.
-- **MongoDB (TypeORM)**: Flexible handling of payment and booking data.
-
+ 
 ## Security Measures
 - **SQL Injection**: Prisma uses parameterized queries, automatically sanitizing inputs to prevent SQL injection attacks.
 - **Cross-Site Scripting (XSS)**: OAuth2 promotes best practices for secure token management, while Prisma encourages input validation, reducing the risk of XSS.
