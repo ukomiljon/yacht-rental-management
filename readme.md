@@ -132,3 +132,5 @@ Each microservice is containerized with Docker, facilitating straightforward dep
 - **Docker**
 - **Swagger**
 
+For more details and to access the code, please visit the [Yacht Rental Management GitHub Repository](https://github.com/ukomiljon/yacht-rental-management).
+
